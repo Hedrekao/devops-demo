@@ -86,3 +86,5 @@ jobs:
         run: |
           docker build . --tag ghcr.io/${{env.OWNER_LC}/devops-demo:latest
           docker push ghcr.io/${{env.OWNER_LC}}/devops-demo:latest
+
+       # test
