@@ -73,8 +73,7 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v3
       - name: set lower case owner name
-        run: |
-          echo "OWNER_LC=${github.actor | lower }" >>${GITHUB_ENV}
+        run: echo "OWNER_LC=$(echo ${GITHUB_ACTOR} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: 'Login to GitHub Container Registry'
         uses: docker/login-action@v2
         with:
@@ -85,5 +84,5 @@ jobs:
           logout: true
       - name: 'Build the Docker Image'
         run: |
-          docker build . --tag ghcr.io/${{OWNER_LC}}/devops-demo:latest
-          docker push ghcr.io/${{OWNER_LC}}/devops-demo:latest
+          docker build . --tag ghcr.io/${{env.OWNER_LC}/devops-demo:latest
+          docker push ghcr.io/${{env.OWNER_LC}}/devops-demo:latest
